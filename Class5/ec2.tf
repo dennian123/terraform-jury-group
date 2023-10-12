@@ -5,7 +5,7 @@ resource "aws_instance" "web" {
   key_name = aws_key_pair.deployer.key_name
 
   #ussually using Anzible -> to copy files from local to remote machine
-  #scp main.tf ec2-user@IP: hello.tf
+  #scp main.tf ec2-user@IP: hello.tf   Copying from Bastion -> abowe aws_instance
   provisioner "file" {
     source = "./main.tf"
     destination = "./hello.tf"
