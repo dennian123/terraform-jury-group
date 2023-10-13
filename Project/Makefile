@@ -1,4 +1,8 @@
-n.virginia:
+#to automate the process(mostly for testing purposes)
+#not make any mistakes on .tfstate file - overwritten(forget to workspace select, new...)
+#simply seperating/having .tfstate file on each region(virginia,ohio...) in different virtual folders
+
+n.virginia:  #name of the blok
 	terraform init
 	terraform workspace new n.virginia || terraform workspace select n.virginia
 	terraform apply -var-file usa-regions/n.virginia.tfvars --auto-approve
@@ -14,6 +18,7 @@ oregon:
 	terraform init 
 	terraform workspace new oregon || terraform workspace select oregon
 	terraform apply -var-file usa-regions/oregon.tfvars --auto-approve
+#apply all(anyName EX: us-apply:) resources at once (spacifiy all names in single line)  	
 usa-all-apply: n.virginia ohio n.california oregon
 
 
