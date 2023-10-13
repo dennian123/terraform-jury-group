@@ -1,33 +1,13 @@
-# terraform {
-#     backend "s3" {   
-#         backet = "terraform-project-virginia-backend"
-#         key = "terraform-project/terraform.tfstate"
-#         region = "us-east-1"   
-#         # dynamodb_tabel = "table-name"
-#     }
-# }
-
-terraform{
-    backend "s3" {
-        bucket = "terraform-project-ohio-backend"    #can be any. Must match name of your s3 backet
-        key = "terraform-project/terraform.tfstate"  #provide the folder where terraform.tfstate file wiill be saved
+#our terraform.tfstate file will NOT be overwritten - versioning. It will be stored in backend S3
+#to go back to previous changes - download state file 
+terraform {
+    backend "s3"{
+        bucket = "erraform-project-ohio-backend"
+        key    = "terraform-project/terraform.tfstate" #weare creating terraform.tfstate file inside kaizen(will be created) folder inside S3 bucket
         region = "us-east-2"
-        dynamodb_table = "lock-state"                
+        #to place a LockID on resource(Create DynamoDB table(NoSQL)).Add here name of created dynamoDB
+        #who first runn terraform apply - locked this file and only he can work with it
+        dynamodb_table = "lock-state" 
     }
 }
-# terraform {
-#     backend "s3" {
-#         backet = "terraform-project-californiaBackend"
-#         key = "terraform-project/terraform.tfstate"
-#         region = "us-west-1"
-#         # dynamodb_tabel = "table-name"
-#     }
-# }
-# terraform {
-#     backend "s3" {
-#         backet = "terraform-project-oregonBackend"
-#         key = "terraform-project/terraform.tfstate"
-#         region = "us-west-2"
-#         # dynamodb_tabel = "table-name"
-#     }
-# }
+
