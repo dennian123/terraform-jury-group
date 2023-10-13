@@ -97,6 +97,7 @@ data "aws_ami" "ubuntu" {
 }
 
 resource "aws_instance" "web" {
+  depends_on = [aws_subnet.main1]
   ami           = data.aws_ami.ubuntu.id
   instance_type = var.ec2_type
   subnet_id = aws_subnet.main1.id
@@ -132,5 +133,5 @@ resource "aws_key_pair" "deployer" {
 
 
 output ec2 {
-    value = aws_instance.web.public_ip
+  value = aws_instance.web.public_ip
 }
